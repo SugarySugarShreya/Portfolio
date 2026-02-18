@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shreya Thakur | Food Technology & Programming</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --secondary: #0288d1;
+            --text: #1a1a1a;
+            --light-text: #555;
+            --bg: #f8fafc;
+            --white: #ffffff;
+            --accent: #fbc02d;
+            --shadow: 0 12px 32px rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        /* ────────────────────────────────────────────────
+           HERO - Left content | Right image
+        ──────────────────────────────────────────────── */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(145deg, #f0f9ff 0%, #e8f5ff 100%);
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2340&q=80') center/cover no-repeat fixed;
+            opacity: 0.06;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 10%;
+            flex-wrap: wrap;
+        }
+
+        .hero-left {
+            flex: 1.4;
+            min-width: 340px;
+        }
+
+        .hero-right {
+            flex: 1;
+            min-width: 320px;
+            perspective: 1200px;
+        }
+
+        .hero-right img {
+            width: 100%;
+            max-width: 380px;
+            height: auto;
+            aspect-ratio: 3/4;
+            border-radius: 16px;
+            object-fit: cover;
+            border: 8px solid var(--white);
+            box-shadow: var(--shadow);
+            transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: rotateY(8deg) rotateX(5deg) scale(0.95);
+            opacity: 0;
+            animation: imageReveal 1.4s forwards 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .hero-right img:hover {
+            transform: rotateY(2deg) rotateX(2deg) scale(1.03);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.18);
+        }
+
+        @keyframes imageReveal {
+            to {
+                opacity: 1;
+                transform: rotateY(0deg) rotateX(0deg) scale(1);
+            }
+        }
+
+        .hero-left > * {
+            opacity: 0;
+            transform: translateX(-40px);
+            animation: contentSlide 1s forwards cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero-left h1        { animation-delay: 0.3s; }
+        .tagline             { animation-delay: 0.5s; }
+        .intro               { animation-delay: 0.7s; }
+        .btn-group           { animation-delay: 0.9s; }
+
+        @keyframes contentSlide {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-left h1 {
+            font-size: clamp(3.2rem, 7vw, 4.8rem);
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1.05;
+            margin-bottom: 0.6rem;
+        }
+
+        .tagline {
+            font-size: clamp(1.3rem, 3vw, 1.7rem);
+            font-weight: 500;
+            color: var(--secondary);
+            margin-bottom: 1.6rem;
+        }
+
+        .intro {
+            font-size: 1.15rem;
+            color: var(--light-text);
+            max-width: 520px;
+            margin-bottom: 2.8rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1.4rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            position: relative;
+            overflow: hidden;
+            padding: 14px 34px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            letter-spacing: 0.3px;
+            z-index: 1;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.25);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 30px rgba(46,125,50,0.28);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 18px 40px rgba(46,125,50,0.38);
+        }
+
+        .btn-outline {
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            color: white;
+            background: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        /* ────────────────────────────────────────────────
+           GENERAL SECTIONS + ANIMATIONS
+        ──────────────────────────────────────────────── */
+        section {
+            padding: 140px 0 100px;
+        }
+
+        h2 {
+            font-size: clamp(2.4rem, 5vw, 3.2rem);
+            font-weight: 700;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 3.5rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 5px;
+            background: var(--secondary);
+            border-radius: 3px;
+            animation: drawLine 1.2s forwards 0.4s ease-out;
+        }
+
+        @keyframes drawLine {
+            to { width: 90px; }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered card entrance */
+        .skill-grid, .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.2rem;
+            margin-top: 2.5rem;
+        }
+
+        .skill-card, .project-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            opacity: 0;
+            transform: translateY(40px) scale(0.96);
+        }
+
+        .skill-card.visible, .project-card.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .skill-card:nth-child(1), .project-card:nth-child(1) { transition-delay: 0.1s; }
+        .skill-card:nth-child(2), .project-card:nth-child(2) { transition-delay: 0.2s; }
+        .skill-card:nth-child(3), .project-card:nth-child(3) { transition-delay: 0.3s; }
+        .skill-card:nth-child(4), .project-card:nth-child(4) { transition-delay: 0.4s; }
+
+        .skill-card:hover, .project-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 24px 48px rgba(0,0,0,0.14);
+        }
+
+        .skill-card h3, .project-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.35rem;
+        }
+
+        /* Skills & Projects specific */
+        #skills {
+            background: #f1f8e9;
+        }
+
+        #projects {
+            background: var(--bg);
+        }
+
+        .project-card {
+            overflow: hidden;
+        }
+
+        .project-card h3 {
+            padding: 1.5rem 1.5rem 0.5rem;
+        }
+
+        .project-card p {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--light-text);
+        }
+
+        /* Education & Certifications */
+        #education, #certifications {
+            background: #f1f8e9;
+        }
+
+        .education-item, .cert-item {
+            max-width: 600px;
+            margin: 1rem auto;
+            text-align: center;
+            padding: 1rem;
+            font-size: 1.1rem;
+            color: var(--light-text);
+        }
+
+        .education-item h3 {
+            color: var(--secondary);
+            font-size: 1.6rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-item {
+            list-style: none;
+        }
+
+        /* Contact */
+        #contact {
+            background: var(--bg);
+        }
+
+        .contact-info {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .contact-info a {
+            color: var(--secondary);
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            margin: 0 1rem;
+            font-size: 1.3rem;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
+            transform: scale(1.1);
+        }
+
+        /* Ready CTA */
+        #ready {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e6f4ff 100%);
+            text-align: center;
+        }
+
+        #ready .container {
+            max-width: 700px;
+        }
+
+        #ready p {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            margin-bottom: 2rem;
+        }
+
+        /* Future Goals */
+        #future-goals {
+            background: #f1f8e9;
+        }
+
+        #future-goals p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.15rem;
+            color: var(--light-text);
+            text-align: center;
+        }
+
+        /* ────────────────────────────────────────────────
+           RESPONSIVE
+        ──────────────────────────────────────────────── */
+        @media (max-width: 1100px) {
+            .hero-content {
+                flex-direction: column;
+                gap: 4rem;
+                text-align: center;
+            }
+            .hero-left {
+                text-align: center;
+            }
+            .btn-group {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section { padding: 100px 0 80px; }
+            .hero-left h1 { font-size: 3.2rem; }
+            .tagline { font-size: 1.4rem; }
+            .skill-grid, .project-grid { grid-template-columns: 1fr; }
+            .btn-group {
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn { width: 100%; max-width: 280px; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 0 4%; }
+        }
+    </style>
+</head>
+<body>
+
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="container hero-content">
+            <div class="hero-left">
+                <h1>Shreya Thakur</h1>
+                <div class="tagline">B.Tech Food Technology Student | Python Developer | C Programmer | Mendix Learner</div>
+                <p class="intro">
+                    Passionate about combining food technology with modern engineering tools. Skilled in programming, CAD, IoT, and digital technologies to build innovative and sustainable food solutions.
+                </p>
+                <div class="btn-group">
+                    <a href="path/to/your-resume.pdf" class="btn btn-primary" download>Download Resume</a>
+                    <a href="#contact" class="btn btn-outline">Available for New Projects</a>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <img src="shreya.png" alt="Shreya Thakur">
+            </div>
+        </div>
+    </section>
+
+    <!-- ────────────────────────────────────────────────
+         About Me
+    ──────────────────────────────────────────────── -->
+    <section id="about" class="fade-in">
+        <div class="container">
+            <h2>About Me</h2>
+            <p style="max-width: 780px; margin: 0 auto 2rem; font-size: 1.15rem; color: var(--light-text); text-align: center;">
+                I am a first-year B.Tech Food Technology student at NIMS University with a strong interest in integrating technology with food science. My goal is to develop innovative solutions that improve food safety, sustainability, and efficiency using modern engineering tools.<br><br>
+                I have foundational knowledge in Python, C programming, HTML, CSS, and Mendix, along with experience using tools like NX CAD and Figma. I am continuously learning and building projects to strengthen my technical and problem-solving skills.<br><br>
+                I am passionate about exploring how emerging technologies such as IoT, automation, and digital design can transform the future of food systems.
+            </p>
+        </div>
+    </section>
+
+    <!-- ────────────────────────────────────────────────
+         Skills
+    ──────────────────────────────────────────────── -->
+    <section id="skills" class="fade-in">
+        <div class="container">
+            <h2>Skills</h2>
+            <div class="skill-grid">
+                <div class="skill-card">
+                    <h3>Programming Skills</h3>
+                    <p>Python, C Programming, C++ (Beginner), HTML, CSS</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Engineering & Technology</h3>
+                    <p>Food Technology Fundamentals, NX CAD, IoT Basics, Mendix Low-Code Development, 3D Printing Basics</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Tools</h3>
+                    <p>VS Code, Figma, Canva, MS Word, PowerPoint</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ────────────────────────────────────────────────
+         Projects
+    ──────────────────────────────────────────────── -->
+    <section id="projects" class="fade-in">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>Portfolio Website</h3>
+                    <p>Designed and developed a personal portfolio using HTML and CSS to showcase skills, projects, and technical background.</p>
+                </div>
+                <div class="project-card">
+                    <h3>C Programming Practice Projects</h3>
+                    <p>Built small programs like calculator, number checker, and pattern generator to strengthen programming logic.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Mendix Learning Project</h3>
+                    <p>Currently learning low-code application development using Mendix platform.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Food Technology Research Learning</h3>
+                    <p>Exploring food processing, preservation techniques, and food safety concepts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ────────────────────────────────────────────────
+         Education
+    ──────────────────────────────────────────────── -->
+    <section id="education" class="fade-in">
+        <div class="container">
+            <h2>Education</h2>
+            <div class="education-item">
+                <h3>B.Tech Food Technology</h3>
+                <p>NIMS University<br>2025 – 2029</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ────────────────────────────────────────────────
+         Certifications
+    ──────────────────────────────────────────────── -->
+    <section id="certifications" class="fade-in">
+        <div class="container">
+            <h2>Certifications</h2>
+            <ul style="list-style: none; padding: 0; max-width: 600px; margin: 0 auto; text-align: center;">
+                <li class="cert-item">Python Basics (in progress)</li>
+                <li class="cert-item">Mendix Beginner Course</li>
+                <li class="cert-item">NX CAD Training (Learning phase)</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ────────────────────────────────────────────────
+         Contact
+    ──────────────────────────────────────────────── -->
+    <section id="contact" class="fade-in">
+        <div class="container">
+            <h2>Contact</h2>
+            <div class="contact-info">
+                <p>Email: <a href="mailto:shreya220107@gmail.com">shreya220107@gmail.com</a><br>
+                Mobile: 7876726474</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/shreyathakur22">LinkedIn</a>
+                    <a href="https://github.com/SugarySugarShreya">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ────────────────────────────────────────────────
+         Ready CTA
+    ──────────────────────────────────────────────── -->
+    <section id="ready" class="fade-in">
+        <div class="container">
+            <h2>Ready to Get Started?</h2>
+            <p>I am available for internships, collaborations, and new projects. Feel free to contact me to discuss opportunities in food tech, programming, or innovation.</p>
+            <a href="mailto:shreya220107@gmail.com" class="btn btn-primary">Message Me</a>
+        </div>
+    </section>
+
+    <!-- ────────────────────────────────────────────────
+         Future Goals
+    ──────────────────────────────────────────────── -->
+    <section id="future-goals" class="fade-in">
+        <div class="container">
+            <h2>Future Goals</h2>
+            <p>My goal is to become a skilled food technologist who integrates engineering, programming, and modern technology to improve food systems and contribute to innovation in the food industry.</p>
+        </div>
+    </section>
+
+    <script>
+        // Fade-in & stagger observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // one-time
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.fade-in, .skill-card, .project-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Subtle parallax
+        window.addEventListener('scroll', () => {
+            const scroll = window.pageYOffset;
+            document.querySelector('.hero-bg').style.transform = `translateY(${scroll * 0.25}px)`;
+        });
+    </script>
+</body>
+</html>
